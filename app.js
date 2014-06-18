@@ -13,6 +13,7 @@
   };
 
   NN.NameWidget = NameWidget = function (div) {
+    this.listnum = 1;
     this.$promptEl = div.find(".prompt");
     this.$inputEl = div.find(".input");
     this.$submitEl = div.find(".submit");
@@ -21,6 +22,7 @@
 
   NameWidget.prototype.installFirstNameHandler = function () {
     this.$promptEl.text("Enter First Name!");
+    this.$inputEl.val('');
     this.$submitEl.off('click');
 
     this.$submitEl.on(
@@ -35,6 +37,7 @@
 
   NameWidget.prototype.installLastNameHandler = function () {
     this.$promptEl.text("Enter Last Name!");
+    this.$inputEl.val('');
     this.$submitEl.off('click');
 
     this.$submitEl.on(
@@ -48,7 +51,11 @@
     var newName = new Name(this.fname, lname);
 
     Name.names.push(newName);
+    this.$contentEl.append(this.listnum + '. ');
     this.$contentEl.append(newName.render());
+    this.$contentEl.append('<br>');
+
+    this.listnum += 1;
 
     this.installFirstNameHandler();
   };
